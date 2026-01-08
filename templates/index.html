@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANIME.ART — Интерьерные картины по аниме</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">ANIME.ART</a>
+            <button id="theme-toggle" class="theme-toggle-btn" title="Сменить тему">
+                <span id="theme-icon">🌙</span>
+            </button>
+        </div>
+    </nav>
+
+    <header class="hero-section d-flex align-items-center text-center">
+        <div class="container position-relative z-1">
+            <div class="badge bg-primary mb-3 px-3 py-2 shadow">240+ довольных клиентов по всей РФ</div>
+            <h1 class="display-4 fw-bold text-uppercase">Авторские интерьерные картины<br>по любимому аниме</h1>
+            <p class="lead mb-4 opacity-75">Качественно. Легально. В твоём стиле.<br>Готовые работы и кастом-арт: холст, паспарту, рамки.</p>
+
+            <div class="d-flex justify-content-center flex-wrap gap-3">
+                <div class="cta-wrapper">
+                    <a href="#catalog" class="btn btn-anime-primary">🚀 Посмотреть работы</a>
+                    <div class="mt-2 small text-white-50">Картин в наличии: 18</div>
+                </div>
+                <div class="cta-wrapper">
+                    <a href="#custom-section" class="btn btn-anime-glass">✨ Заказать свой сюжет</a>
+                    <div class="mt-2 small text-white-50">Обсудим идею за 15 мин</div>
+                </div>
+            </div>
+
+            <div class="mt-5 d-flex justify-content-center gap-4 flex-wrap trust-line">
+                <span>🛡️ Гарантия качества</span>
+                <span>💳 Безопасная оплата</span>
+                <span>🚚 Отправка 2–7 дней</span>
+            </div>
+        </div>
+    </header>
+
+    <section id="catalog" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold section-title">Выбери свой фандом</h2>
+                <div class="title-underline mx-auto"></div>
+            </div>
+
+            <div class="row g-4">
+                {% for item in products %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card product-card h-100">
+                        <div class="product-img-container">
+                            <img src="{{ item.image }}" class="card-img-top" alt="{{ item.title }}">
+                            <div class="product-badge">{{ item.status }}</div>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <span class="fandom-label">{{ item.fandom }}</span>
+                                <span class="stock-notice">{{ item.stock }}</span>
+                            </div>
+                            <h5 class="product-title">{{ item.title }}</h5>
+                            <div class="tags-row mb-3">
+                                {% for tag in item.tags %}
+                                <span class="badge bg-light text-dark border small">{{ tag }}</span>
+                                {% endfor %}
+                            </div>
+                            <div class="mt-auto">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="product-price">{{ item.price }}</span>
+                                    <small class="text-muted">{{ item.delivery }}</small>
+                                </div>
+                                <button class="btn btn-buy-now w-100">Хочу эту</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <section id="custom-section" class="py-5 bg-darker position-relative">
+        <div class="container position-relative">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <h2 class="display-5 fw-bold mb-5 section-title">Процесс создания магии</h2>
+                    <div class="custom-steps-v2">
+                        <div class="step-item">
+                            <div class="step-number">01</div>
+                            <div class="step-content">
+                                <h5>Твоя задумка</h5>
+                                <p class="text-muted">Скидываешь идею или референс. Мы ловим вайб и предлагаем стиль.</p>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">02</div>
+                            <div class="step-content">
+                                <h5>Концепт-арт</h5>
+                                <p class="text-muted">Делаем черновик и фотопривязку картины к твоему интерьеру.</p>
+                            </div>
+                        </div>
+                        <div class="step-item">
+                            <div class="step-number">03</div>
+                            <div class="step-content">
+                                <h5>Печать и упаковка</h5>
+                                <p class="text-muted">Используем холст и премиум краски. Бережно пакуем в 3 слоя.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="card custom-form-card border-0 p-4 p-md-5 shadow-lg">
+                        <div class="form-header text-center mb-4">
+                            <h3 class="fw-bold m-0">Старт проекта</h3>
+                            <p class="small text-muted">Рассчитаем стоимость за 15 минут</p>
+                        </div>
+
+                        {% with messages = get_flashed_messages() %}
+                            {% if messages %}
+                                <div class="alert alert-success rounded-4 mb-4">{{ messages[0] }}</div>
+                            {% endif %}
+                        {% endwith %}
+
+                        <form action="/order" method="POST" class="anime-form">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Как тебя зовут?</label>
+                                <input type="text" name="name" class="form-control" placeholder="Кира Йошикаге" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Где удобнее общаться?</label>
+                                <input type="text" name="contact" class="form-control" placeholder="Telegram @username" required>
+                            </div>
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Твоя идея</label>
+                                <textarea name="idea" class="form-control" rows="3" placeholder="Опиши персонажа или стиль..."></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-anime-primary w-100 py-3">Запустить процесс ✨</button>
+                            <p class="legal-notice text-center mt-3">Нажимая кнопку, вы соглашаетесь с офертой и обработкой данных.</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-md-6">
+                    <h4 class="fw-bold mb-4">FAQ</h4>
+                    <div class="accordion accordion-flush" id="faq">
+                        <div class="accordion-item bg-transparent">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed bg-transparent text-main" type="button" data-bs-toggle="collapse" data-bs-target="#f1">
+                                    Как происходит доставка?
+                                </button>
+                            </h2>
+                            <div id="f1" class="accordion-collapse collapse" data-bs-parent="#faq">
+                                <div class="accordion-body text-muted small">Доставляем СДЭКом или Почтой РФ. Каждая картина в защитном коробе.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <h4 class="fw-bold mb-4">О нас</h4>
+                    <p class="small text-muted">Мы создаём фан-арт по мотивам любимых тайтлов. Работаем официально с частными заказами. Гарантия возврата — 7 дней.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const toggleBtn = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const body = document.body;
+
+        if (localStorage.getItem('theme') === 'dark') {
+            body.setAttribute('data-theme', 'dark');
+            themeIcon.textContent = '☀️';
+        }
+
+        toggleBtn.addEventListener('click', () => {
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
+</body>
+</html>
