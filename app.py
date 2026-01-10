@@ -1,9 +1,11 @@
-from flask import Flask, render_template, request, flash, redirect
+from flask import Flask, render_template, request, flash, redirect, url_for
+from stash import faq
+from stash.faq import FAQ_ITEMS
 
 app = Flask(__name__)
 app.secret_key = "anime_art_secret"
 
-# Расширенная база данных товаров по рекомендациям из аудита
+# База данных товаров
 products = [
     {
         "id": 1,
@@ -43,21 +45,35 @@ products = [
 
 @app.route('/')
 def index():
-    return render_template('index.html', products=products)
-
+    return render_template(
+        'index.html',
+        products=products,
+        faq=FAQ_ITEMS
+    )
 
 @app.route('/order', methods=['POST'])
 def order():
-    name = request.form.get('name')
-    contact = request.form.get('contact')
-    idea = request.form.get('idea')
+    # Сбор всех данных из формы
+    form_data = {
+        "name": request.form.get('name'),
+        "contact": request.form.get('contact'),
+        "idea": request.form.get('idea'),
+        "ref": request.form.get('ref'),
+        "size": request.form.get('size', 'Не указан')
+    }
 
-    # Здесь можно добавить логику отправки в Telegram
-    print(f"Новый заказ: {name}, {contact}, Идея: {idea}")
+    # Логика обработки (например, формирование строки для логов или Telegram)
+    log_message = (
+        f"ЗАКАЗ: {form_data['name']} | "
+        f"Связь: {form_data['contact']} | "
+        f"Размер: {form_data['size']} | "
+        f"Идея: {form_data['idea']} | "
+        f"Реф: {form_data['ref']}"
+    )
+    print(log_message)
 
     flash("Заявка успешно отправлена! Мы свяжемся с вами в течение часа.")
-    return redirect('/#custom-section')
-
+    return redirect(url_for('index', _anchor='custom-section'))
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -1,203 +1,229 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ANIME.ART — Интерьерные картины по аниме</title>
+    <title>ANICRAFT</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">ANIME.ART</a>
-            <button id="theme-toggle" class="theme-toggle-btn" title="Сменить тему">
-                <span id="theme-icon">🌙</span>
-            </button>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#">ANI <span>CRAFT</span>
+        </a>
+        <div class="d-flex align-items-center order-lg-3 gap-2">
+          <button id="theme-toggle" class="theme-toggle-btn" title="Сменить тему">
+            <span id="theme-icon">🌙</span>
+          </button>
+          <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+            <span class="navbar-toggler-icon"></span>
+          </button>
         </div>
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="navbar-nav mx-auto mb-2 mb-lg-0 fw-medium">
+            <li class="nav-item">
+              <a class="nav-link px-3" href="#about">О нас</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link px-3" href="#catalog">Каталог</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link px-3" href="#faq">FAQ</a>
+            </li>
+          </ul>
+        </div>
+      </div>
     </nav>
-
     <header class="hero-section d-flex align-items-center text-center">
-        <div class="container position-relative z-1">
-            <div class="badge bg-primary mb-3 px-3 py-2 shadow">240+ довольных клиентов по всей РФ</div>
-            <h1 class="display-4 fw-bold text-uppercase">Авторские интерьерные картины<br>по любимому аниме</h1>
-            <p class="lead mb-4 opacity-75">Качественно. Легально. В твоём стиле.<br>Готовые работы и кастом-арт: холст, паспарту, рамки.</p>
-
-            <div class="d-flex justify-content-center flex-wrap gap-3">
-                <div class="cta-wrapper">
-                    <a href="#catalog" class="btn btn-anime-primary">🚀 Посмотреть работы</a>
-                    <div class="mt-2 small text-white-50">Картин в наличии: 18</div>
-                </div>
-                <div class="cta-wrapper">
-                    <a href="#custom-section" class="btn btn-anime-glass">✨ Заказать свой сюжет</a>
-                    <div class="mt-2 small text-white-50">Обсудим идею за 15 мин</div>
-                </div>
-            </div>
-
-            <div class="mt-5 d-flex justify-content-center gap-4 flex-wrap trust-line">
-                <span>🛡️ Гарантия качества</span>
-                <span>💳 Безопасная оплата</span>
-                <span>🚚 Отправка 2–7 дней</span>
-            </div>
+      <div class="container position-relative z-1">
+        <div class="badge bg-primary mb-3 px-3 py-2 shadow">240+ довольных клиентов по всей РФ</div>
+        <h1 class="display-4 fw-bold text-uppercase text-white">Авторские интерьерные картины <br>по любимому аниме </h1>
+        <p class="lead mb-4 opacity-75">Готовые работы и кастом-арт: качественно и в твоём стиле</p>
+        <div class="d-flex justify-content-center flex-wrap gap-3">
+          <div class="cta-wrapper">
+            <a href="#catalog" class="btn btn-anime-primary">🚀 Посмотреть работы</a>
+            <div class="mt-2 small text-white-50">Каталог готовых работ</div>
+          </div>
+          <div class="cta-wrapper">
+            <a href="#custom-section" class="btn btn-anime-glass">✨ Заказать свой сюжет</a>
+            <div class="mt-2 small text-white-50">Обсудим идею за 15 мин</div>
+          </div>
         </div>
+        <div class="mt-5 d-flex justify-content-center gap-4 flex-wrap trust-line">
+          <span>🛡️ Гарантия качества</span>
+          <span>💳 Безопасная оплата</span>
+          <span>🚚 Отправка 2–7 дней</span>
+        </div>
+      </div>
     </header>
-
+    <section id="about" class="py-5 position-relative overflow-hidden">
+      <div class="container py-lg-4">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6 order-2 order-lg-1">
+            <div class="about-img-wrapper position-relative">
+              <div class="about-blob"></div>
+              <div class="video-container rounded-4 shadow position-relative z-1 border border-secondary border-opacity-10 overflow-hidden">
+                <video autoplay muted loop playsinline preload="auto" poster="https://images.unsplash.com/photo-1513364776144-60967b0f800f?q=80&w=800&auto=format&fit=crop" class="w-100 d-block">
+                  <source src="{{ url_for('static', filename='video.mov') }}" type="video/mp4"> Ваш браузер не поддерживает видео.
+                </video>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 order-1 order-lg-2">
+            <h2 class="display-6 fw-bold section-title mb-4">Не просто постеры</h2>
+            <div class="title-underline mb-4"></div>
+            <div class="about-text fs-5 text-muted opacity-75">
+              <p class="mb-4">Мы выросли на аниме и делаем картины для таких же людей! Каждая работа — это премиум материалы и глубокая цветопередача.</p>
+              <blockquote class="border-start border-4 border-primary ps-4 fst-italic my-4 text-main"> Поэтому мы создаём интерьерные картины, которые приятно видеть каждый день. </blockquote>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <section id="catalog" class="py-5">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="display-5 fw-bold section-title">Выбери свой фандом</h2>
-                <div class="title-underline mx-auto"></div>
-            </div>
-
-            <div class="row g-4">
-                {% for item in products %}
-                <div class="col-md-6 col-lg-4">
-                    <div class="card product-card h-100">
-                        <div class="product-img-container">
-                            <img src="{{ item.image }}" class="card-img-top" alt="{{ item.title }}">
-                            <div class="product-badge">{{ item.status }}</div>
-                        </div>
-                        <div class="card-body d-flex flex-column">
-                            <div class="d-flex justify-content-between align-items-center mb-2">
-                                <span class="fandom-label">{{ item.fandom }}</span>
-                                <span class="stock-notice">{{ item.stock }}</span>
-                            </div>
-                            <h5 class="product-title">{{ item.title }}</h5>
-                            <div class="tags-row mb-3">
-                                {% for tag in item.tags %}
-                                <span class="badge bg-light text-dark border small">{{ tag }}</span>
-                                {% endfor %}
-                            </div>
-                            <div class="mt-auto">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <span class="product-price">{{ item.price }}</span>
-                                    <small class="text-muted">{{ item.delivery }}</small>
-                                </div>
-                                <button class="btn btn-buy-now w-100">Хочу эту</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
+      <div class="container">
+        <div class="text-center mb-5">
+          <h2 class="display-5 fw-bold section-title">Выбери свой тайтл</h2>
+          <div class="title-underline mx-auto"></div>
         </div>
-    </section>
-
-    <section id="custom-section" class="py-5 bg-darker position-relative">
-        <div class="container position-relative">
-            <div class="row align-items-center g-5">
-                <div class="col-lg-6">
-                    <h2 class="display-5 fw-bold mb-5 section-title">Процесс создания магии</h2>
-                    <div class="custom-steps-v2">
-                        <div class="step-item">
-                            <div class="step-number">01</div>
-                            <div class="step-content">
-                                <h5>Твоя задумка</h5>
-                                <p class="text-muted">Скидываешь идею или референс. Мы ловим вайб и предлагаем стиль.</p>
-                            </div>
-                        </div>
-                        <div class="step-item">
-                            <div class="step-number">02</div>
-                            <div class="step-content">
-                                <h5>Концепт-арт</h5>
-                                <p class="text-muted">Делаем черновик и фотопривязку картины к твоему интерьеру.</p>
-                            </div>
-                        </div>
-                        <div class="step-item">
-                            <div class="step-number">03</div>
-                            <div class="step-content">
-                                <h5>Печать и упаковка</h5>
-                                <p class="text-muted">Используем холст и премиум краски. Бережно пакуем в 3 слоя.</p>
-                            </div>
-                        </div>
-                    </div>
+        <div class="row g-4"> {% for item in products %} <div class="col-md-6 col-lg-4">
+            <div class="card product-card h-100">
+              <div class="product-img-container">
+                <img src="{{ item.image }}" class="card-img-top" alt="{{ item.title }}">
+                <div class="product-badge">{{ item.status }}</div>
+              </div>
+              <div class="card-body d-flex flex-column">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <span class="fandom-label">{{ item.fandom }}</span>
+                  <span class="stock-notice small">{{ item.stock }}</span>
                 </div>
-
-                <div class="col-lg-6">
-                    <div class="card custom-form-card border-0 p-4 p-md-5 shadow-lg">
-                        <div class="form-header text-center mb-4">
-                            <h3 class="fw-bold m-0">Старт проекта</h3>
-                            <p class="small text-muted">Рассчитаем стоимость за 15 минут</p>
-                        </div>
-
-                        {% with messages = get_flashed_messages() %}
-                            {% if messages %}
-                                <div class="alert alert-success rounded-4 mb-4">{{ messages[0] }}</div>
-                            {% endif %}
-                        {% endwith %}
-
-                        <form action="/order" method="POST" class="anime-form">
-                            <div class="mb-3">
-                                <label class="form-label fw-bold">Как тебя зовут?</label>
-                                <input type="text" name="name" class="form-control" placeholder="Кира Йошикаге" required>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label fw-bold">Где удобнее общаться?</label>
-                                <input type="text" name="contact" class="form-control" placeholder="Telegram @username" required>
-                            </div>
-                            <div class="mb-4">
-                                <label class="form-label fw-bold">Твоя идея</label>
-                                <textarea name="idea" class="form-control" rows="3" placeholder="Опиши персонажа или стиль..."></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-anime-primary w-100 py-3">Запустить процесс ✨</button>
-                            <p class="legal-notice text-center mt-3">Нажимая кнопку, вы соглашаетесь с офертой и обработкой данных.</p>
-                        </form>
-                    </div>
+                <div class="product-tags mb-2"> {% for tag in item.tags %} <span class="badge rounded-pill bg-secondary bg-opacity-10 text-muted fw-normal" style="font-size: 0.7rem; border: 1px solid var(--border-color);">
+                    {{ tag }}
+                  </span> {% endfor %} </div>
+                <h5 class="product-title">{{ item.title }}</h5>
+                <div class="mt-auto pt-3">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="product-price">{{ item.price }}</span>
+                    <small class="text-muted">{{ item.delivery }}</small>
+                  </div>
+                  <button class="btn btn-buy-now w-100">Хочу эту</button>
                 </div>
+              </div>
             </div>
-        </div>
+          </div> {% endfor %} </div>
+      </div>
     </section>
-
+    <section id="custom-section" class="py-5 bg-darker">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-5">
+            <h2 class="display-6 fw-bold mb-4">Кастомная картина под ваш сюжет</h2>
+            <p class="text-muted mb-5">Опишите идею — мы всё остальное возьмём на себя. Даже если у вас есть только персонаж или настроение — этого достаточно.</p>
+          </div>
+          <div class="col-lg-7">
+            <div class="card custom-form-card border-0 p-4 shadow-lg"> {% with messages = get_flashed_messages() %} {% if messages %} <div class="text-center py-4">
+                <h3 class="fw-bold mb-3">Спасибо! Мы уже смотрим вашу идею 👀</h3>
+                <p class="text-muted mb-4">Напишем вам в ближайшее время, чтобы обсудить детали и предложить варианты. Пока можно заглянуть в готовые работы — вдруг что-то откликнется</p>
+                <a href="#catalog" class="btn btn-anime-primary">🔥 Смотреть коллекцию</a>
+              </div> {% else %} <form action="/order" method="POST">
+                <div class="row g-3">
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label small fw-bold">1. Как к вам обращаться?</label>
+                    <input type="text" name="name" class="form-control" placeholder="Имя" required>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label class="form-label small fw-bold">2. Куда удобнее написать?</label>
+                    <input type="text" name="contact" class="form-control" placeholder="Telegram / WhatsApp" required>
+                  </div>
+                  <div class="col-12 mb-3">
+                    <label class="form-label small fw-bold">3. Что вы хотите изобразить?</label>
+                    <textarea name="idea" class="form-control" rows="2" placeholder="Например: Naruto, Gojo, мрачная атмосфера..."></textarea>
+                  </div>
+                  <div class="col-12 mb-3">
+                    <label class="form-label small fw-bold">4. Есть референс? (необязательно)</label>
+                    <input type="text" name="ref" class="form-control" placeholder="Загрузить фото или вставить ссылку">
+                    <div class="form-text small">Если нет — подберём сами</div>
+                  </div>
+                  <div class="col-12 mb-4">
+                    <label class="form-label small fw-bold d-block">5. Размер картины (необязательно)</label>
+                    <div class="d-flex flex-wrap gap-2">
+                      <input type="radio" class="btn-check" name="size" id="s1" value="Small">
+                      <label class="btn btn-outline-secondary btn-sm rounded-pill px-3" for="s1">Маленькая</label>
+                      <input type="radio" class="btn-check" name="size" id="s2" value="Medium">
+                      <label class="btn btn-outline-secondary btn-sm rounded-pill px-3" for="s2">Средняя</label>
+                      <input type="radio" class="btn-check" name="size" id="s3" value="Large">
+                      <label class="btn btn-outline-secondary btn-sm rounded-pill px-3" for="s3">Большая</label>
+                      <input type="radio" class="btn-check" name="size" id="s4" value="IDK" checked>
+                      <label class="btn btn-outline-secondary btn-sm rounded-pill px-3" for="s4">Не знаю</label>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <button type="submit" class="btn btn-anime-primary w-100 py-3 mb-2">Запустить процесс</button>
+                    <p class="text-center small text-muted opacity-75">Мы свяжемся с вами, уточним детали и рассчитаем стоимость. Без обязательств и давления.</p>
+                  </div>
+                </div>
+              </form> {% endif %} {% endwith %} </div>
+          </div>
+        </div>
+      </div>
+    </section>
     <section class="py-5">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-md-6">
-                    <h4 class="fw-bold mb-4">FAQ</h4>
-                    <div class="accordion accordion-flush" id="faq">
-                        <div class="accordion-item bg-transparent">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed bg-transparent text-main" type="button" data-bs-toggle="collapse" data-bs-target="#f1">
-                                    Как происходит доставка?
-                                </button>
-                            </h2>
-                            <div id="f1" class="accordion-collapse collapse" data-bs-parent="#faq">
-                                <div class="accordion-body text-muted small">Доставляем СДЭКом или Почтой РФ. Каждая картина в защитном коробе.</div>
-                            </div>
-                        </div>
-                    </div>
+      <div class="container">
+        <div class="row g-5">
+          <div class="col-md-7">
+            <h4 class="fw-bold mb-4">Часто задаваемые вопросы</h4>
+            <div class="accordion accordion-flush custom-faq" id="faq"> {% for item in faq %} <div class="accordion-item bg-transparent">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#faq-{{ loop.index }}">
+                    {{ item.q }}
+                  </button>
+                </h2>
+                <div id="faq-{{ loop.index }}" class="accordion-collapse collapse" data-bs-parent="#faq">
+                  <div class="accordion-body text-muted small">
+                    {{ item.a }}
+                  </div>
                 </div>
-                <div class="col-md-6 text-md-end">
-                    <h4 class="fw-bold mb-4">О нас</h4>
-                    <p class="small text-muted">Мы создаём фан-арт по мотивам любимых тайтлов. Работаем официально с частными заказами. Гарантия возврата — 7 дней.</p>
-                </div>
-            </div>
+              </div> {% endfor %} </div>
+          </div>
         </div>
+      </div>
     </section>
-
+    <footer class="footer-section py-5">
+      <div class="container">
+        <div class="row gy-4 justify-content-between">
+          <div class="col-lg-5 col-md-6">
+            <a class="navbar-brand mb-3 d-inline-block fs-4 fw-bold text-decoration-none text-dark" href="/"> ANI <span class="text-primary">CRAFT</span>
+            </a>
+            <p class="footer-description text-muted mb-4"> Создаем уникальные цифровые и печатные арты для истинных ценителей аниме-культуры. </p>
+          </div>
+          <div class="col-lg-4 col-md-6 text-md-end">
+            <h5 class="fw-bold mb-3">Юридическая информация</h5>
+            <ul class="list-unstyled text-muted small">
+              <li class="mb-1">ИП Котельников Родион Дмитриевич</li>
+              <li class="mb-1">
+                <strong>ИНН:</strong> 123456789012
+              </li>
+              <li class="mb-1">
+                <strong>ОГРНИП:</strong> 321654987000012
+              </li>
+              <li class="mb-1">Россия, г. Москва</li>
+            </ul>
+          </div>
+        </div>
+        <hr class="my-4 opacity-25">
+        <div class="footer-bottom">
+          <div class="row">
+            <div class="col-12 text-center">
+              <p class="copyright mb-0 small text-muted"> &copy; 2024-2026 ANICRAFT. Все права защищены. </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        const toggleBtn = document.getElementById('theme-toggle');
-        const themeIcon = document.getElementById('theme-icon');
-        const body = document.body;
-
-        if (localStorage.getItem('theme') === 'dark') {
-            body.setAttribute('data-theme', 'dark');
-            themeIcon.textContent = '☀️';
-        }
-
-        toggleBtn.addEventListener('click', () => {
-            if (body.getAttribute('data-theme') === 'dark') {
-                body.removeAttribute('data-theme');
-                themeIcon.textContent = '🌙';
-                localStorage.setItem('theme', 'light');
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                themeIcon.textContent = '☀️';
-                localStorage.setItem('theme', 'dark');
-            }
-        });
-    </script>
-</body>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
 </html>
