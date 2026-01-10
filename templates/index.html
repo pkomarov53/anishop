@@ -12,7 +12,7 @@
   <body>
     <nav class="navbar navbar-expand-lg fixed-top navbar-custom">
       <div class="container">
-        <a class="navbar-brand fw-bold" href="#">ANI <span>CRAFT</span>
+        <a class="navbar-brand fw-bold" href="#">ANI<span>CRAFT</span>
         </a>
         <div class="d-flex align-items-center order-lg-3 gap-2">
           <button id="theme-toggle" class="theme-toggle-btn" title="Сменить тему">
@@ -84,38 +84,76 @@
       </div>
     </section>
     <section id="catalog" class="py-5">
-      <div class="container">
-        <div class="text-center mb-5">
-          <h2 class="display-5 fw-bold section-title">Выбери свой тайтл</h2>
-          <div class="title-underline mx-auto"></div>
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 class="display-5 fw-bold section-title">Выбери свой тайтл</h2>
+      <div class="title-underline mx-auto"></div>
+    </div>
+
+    <div class="row justify-content-center mb-5">
+      <div class="col-lg-8">
+        <div class="input-group search-bar-custom shadow-sm">
+          <span class="input-group-text bg-white border-0 ps-4">
+            <i class="fas fa-search text-muted"></i>
+          </span>
+          <input type="text" id="searchInput" class="form-control border-0 py-3"
+                 placeholder="Найти по названию, аниме или тегу (например: Naruto, мрачный...)">
         </div>
-        <div class="row g-4"> {% for item in products %} <div class="col-md-6 col-lg-4">
-            <div class="card product-card h-100">
-              <div class="product-img-container">
-                <img src="{{ item.image }}" class="card-img-top" alt="{{ item.title }}">
-                <div class="product-badge">{{ item.status }}</div>
-              </div>
-              <div class="card-body d-flex flex-column">
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                  <span class="fandom-label">{{ item.fandom }}</span>
-                  <span class="stock-notice small">{{ item.stock }}</span>
-                </div>
-                <div class="product-tags mb-2"> {% for tag in item.tags %} <span class="badge rounded-pill bg-secondary bg-opacity-10 text-muted fw-normal" style="font-size: 0.7rem; border: 1px solid var(--border-color);">
-                    {{ tag }}
-                  </span> {% endfor %} </div>
-                <h5 class="product-title">{{ item.title }}</h5>
-                <div class="mt-auto pt-3">
-                  <div class="d-flex justify-content-between align-items-center mb-3">
-                    <span class="product-price">{{ item.price }}</span>
-                    <small class="text-muted">{{ item.delivery }}</small>
-                  </div>
-                  <button class="btn btn-buy-now w-100">Хочу эту</button>
-                </div>
-              </div>
-            </div>
-          </div> {% endfor %} </div>
       </div>
-    </section>
+    </div>
+
+    <div class="row g-4" id="productsContainer">
+      {% for item in products %}
+      <div class="col-md-6 col-lg-4 product-item"
+           data-title="{{ item.title | lower }}"
+           data-fandom="{{ item.fandom | lower }}"
+           data-tags="{{ item.tags | join(' ') | lower }}">
+
+        <div class="card product-card h-100">
+          <div class="product-img-container">
+            <img src="{{ item.image }}" class="card-img-top" alt="{{ item.title }}">
+            <div class="product-badge">{{ item.status }}</div>
+          </div>
+          <div class="card-body d-flex flex-column">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="fandom-label">{{ item.fandom }}</span>
+              <span class="stock-notice small">{{ item.stock }}</span>
+            </div>
+            <div class="product-tags mb-2">
+              {% for tag in item.tags %}
+              <span class="badge rounded-pill bg-secondary bg-opacity-10 text-muted fw-normal"
+                    style="font-size: 0.7rem; border: 1px solid var(--border-color);">
+                {{ tag }}
+              </span>
+              {% endfor %}
+            </div>
+            <h5 class="product-title">{{ item.title }}</h5>
+            <div class="mt-auto pt-3">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="product-price">{{ item.price }}</span>
+                <small class="text-muted">{{ item.delivery }}</small>
+              </div>
+              <button class="btn btn-buy-now w-100">Хочу эту</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div id="noResults" class="text-center py-5 d-none">
+        <h4 class="text-muted">Ничего не найдено 😔</h4>
+        <p class="text-muted small">Попробуйте изменить запрос</p>
+    </div>
+
+    <div class="text-center mt-5">
+      <button id="loadMoreBtn" class="btn btn-outline-secondary rounded-pill px-5 py-2">
+        Показать ещё
+      </button>
+    </div>
+
+  </div>
+</section>
     <section id="custom-section" class="py-5 bg-darker">
       <div class="container">
         <div class="row align-items-center g-5">
@@ -170,12 +208,12 @@
         </div>
       </div>
     </section>
-    <section class="py-5">
+    <section class="py-5" id="faq">
       <div class="container">
         <div class="row g-5">
           <div class="col-md-7">
             <h4 class="fw-bold mb-4">Часто задаваемые вопросы</h4>
-            <div class="accordion accordion-flush custom-faq" id="faq"> {% for item in faq %} <div class="accordion-item bg-transparent">
+            <div class="accordion accordion-flush custom-faq" > {% for item in faq %} <div class="accordion-item bg-transparent">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#faq-{{ loop.index }}">
                     {{ item.q }}

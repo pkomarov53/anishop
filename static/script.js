@@ -33,6 +33,82 @@ document.addEventListener('DOMContentLoaded', () => {
             setTheme('dark');
         }
     });
+    document.addEventListener('DOMContentLoaded', () => {
+    // --- ЛОГИКА КАТАЛОГА (ПОИСК + "ПОКАЗАТЬ ЕЩЁ") ---
+
+    const searchInput = document.getElementById('searchInput');
+    const productsContainer = document.getElementById('productsContainer');
+    const allProducts = Array.from(document.querySelectorAll('.product-item'));
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    const noResults = document.getElementById('noResults');
+
+    let visibleCount = 6; // Сколько показывать сначала
+    const itemsPerLoad = 3; // Сколько добавлять по кнопке
+
+    // Функция отображения товаров
+    function renderCatalog() {
+        const query = searchInput.value.toLowerCase().trim();
+        let matches = 0;
+        let visibleMatches = 0;
+
+        allProducts.forEach(product => {
+            // Получаем данные из data-атрибутов
+            const title = product.dataset.title;
+            const fandom = product.dataset.fandom;
+            const tags = product.dataset.tags;
+
+            // Проверяем соответствие поиску (или если поиск пустой - true)
+            const isMatch = !query ||
+                            title.includes(query) ||
+                            fandom.includes(query) ||
+                            tags.includes(query);
+
+            if (isMatch) {
+                matches++;
+                // Показываем только если мы не превысили лимит visibleCount
+                if (matches <= visibleCount) {
+                    product.classList.remove('d-none');
+                    visibleMatches++;
+                } else {
+                    product.classList.add('d-none');
+                }
+            } else {
+                product.classList.add('d-none');
+            }
+        });
+
+        // Управление видимостью кнопки "Показать ещё"
+        // Если количество совпадений больше, чем мы сейчас показали -> кнопка нужна
+        if (matches > visibleCount) {
+            loadMoreBtn.classList.remove('d-none');
+        } else {
+            loadMoreBtn.classList.add('d-none');
+        }
+
+        // Управление блоком "Ничего не найдено"
+        if (matches === 0) {
+            noResults.classList.remove('d-none');
+        } else {
+            noResults.classList.add('d-none');
+        }
+    }
+
+    // Событие ввода в поиск
+    searchInput.addEventListener('input', () => {
+        // При поиске сбрасываем счетчик видимых до начального значения
+        visibleCount = 6;
+        renderCatalog();
+    });
+
+    // Событие клика "Показать ещё"
+    loadMoreBtn.addEventListener('click', () => {
+        visibleCount += itemsPerLoad;
+        renderCatalog();
+    });
+
+    // Инициализация при загрузке
+    renderCatalog();
+});
 });
 
 window.addEventListener('scroll', function() {
@@ -52,4 +128,81 @@ navLinks.forEach((l) => {
     l.addEventListener('click', () => {
         if(window.innerWidth < 992) { bsCollapse.hide(); }
     });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    // --- ЛОГИКА КАТАЛОГА (ПОИСК + "ПОКАЗАТЬ ЕЩЁ") ---
+
+    const searchInput = document.getElementById('searchInput');
+    const productsContainer = document.getElementById('productsContainer');
+    const allProducts = Array.from(document.querySelectorAll('.product-item'));
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    const noResults = document.getElementById('noResults');
+
+    let visibleCount = 6; // Сколько показывать сначала
+    const itemsPerLoad = 3; // Сколько добавлять по кнопке
+
+    // Функция отображения товаров
+    function renderCatalog() {
+        const query = searchInput.value.toLowerCase().trim();
+        let matches = 0;
+        let visibleMatches = 0;
+
+        allProducts.forEach(product => {
+            // Получаем данные из data-атрибутов
+            const title = product.dataset.title;
+            const fandom = product.dataset.fandom;
+            const tags = product.dataset.tags;
+
+            // Проверяем соответствие поиску (или если поиск пустой - true)
+            const isMatch = !query ||
+                            title.includes(query) ||
+                            fandom.includes(query) ||
+                            tags.includes(query);
+
+            if (isMatch) {
+                matches++;
+                // Показываем только если мы не превысили лимит visibleCount
+                if (matches <= visibleCount) {
+                    product.classList.remove('d-none');
+                    visibleMatches++;
+                } else {
+                    product.classList.add('d-none');
+                }
+            } else {
+                product.classList.add('d-none');
+            }
+        });
+
+        // Управление видимостью кнопки "Показать ещё"
+        // Если количество совпадений больше, чем мы сейчас показали -> кнопка нужна
+        if (matches > visibleCount) {
+            loadMoreBtn.classList.remove('d-none');
+        } else {
+            loadMoreBtn.classList.add('d-none');
+        }
+
+        // Управление блоком "Ничего не найдено"
+        if (matches === 0) {
+            noResults.classList.remove('d-none');
+        } else {
+            noResults.classList.add('d-none');
+        }
+    }
+
+    // Событие ввода в поиск
+    searchInput.addEventListener('input', () => {
+        // При поиске сбрасываем счетчик видимых до начального значения
+        visibleCount = 6;
+        renderCatalog();
+    });
+
+    // Событие клика "Показать ещё"
+    loadMoreBtn.addEventListener('click', () => {
+        visibleCount += itemsPerLoad;
+        renderCatalog();
+    });
+
+    // Инициализация при загрузке
+    renderCatalog();
 });

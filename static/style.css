@@ -1,61 +1,42 @@
-/* =========================================
-   1. ПЕРЕМЕННЫЕ И ТЕМЫ (MODERN PALETTE)
-   ========================================= */
 :root {
     --font-main: 'Manrope', sans-serif;
-
-    /* --- LIGHT THEME --- */
     --bg-body: #F9FAFB;
     --bg-card: #ffffff;
     --bg-secondary: #f3f4f6;
-
     --text-main: #111827;
     --text-muted: #6b7280;
-
     --primary-color: #7c3aed;
     --primary-hover: #6d28d9;
-
     --input-bg: #ffffff;
     --input-border: #e5e7eb;
-
     --nav-bg: rgba(255, 255, 255, 0.85);
     --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
     --shadow-glow: 0 0 20px rgba(124, 58, 237, 0.3);
-
-    --border-color: rgba(0,0,0,0.08);
+    --border-color: rgba(0, 0, 0, 0.08);
 }
 
 [data-theme="dark"] {
-    /* --- DARK THEME --- */
     --bg-body: #0f0f12;
-    --bg-card: #18181b;        /* Темно-серый для карточек */
+    --bg-card: #18181b;
     --bg-secondary: #27272a;
-
-    --text-main: #f3f4f6;      /* Светлый текст */
+    --text-main: #f3f4f6;
     --text-muted: #9ca3af;
-
     --primary-color: #8b5cf6;
     --primary-hover: #a78bfa;
-
-    --input-bg: #09090b;       /* Почти черный для полей ввода */
+    --input-bg: #09090b;
     --input-border: #3f3f46;
-
     --nav-bg: rgba(15, 15, 18, 0.85);
     --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
     --shadow-glow: 0 0 25px rgba(139, 92, 246, 0.2);
-
-    --border-color: rgba(255,255,255,0.1);
+    --border-color: rgba(255, 255, 255, 0.1);
 }
 
-/* =========================================
-   2. БАЗОВЫЕ СТИЛИ
-   ========================================= */
 body {
     background-color: var(--bg-body);
     color: var(--text-main);
     font-family: var(--font-main);
     line-height: 1.6;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color .3s ease, color .3s ease;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -65,14 +46,10 @@ h1, h2, h3, h4, h5, h6 {
     letter-spacing: -0.02em;
 }
 
-/* Глобальный фикс для Bootstrap элементов */
 .text-muted { color: var(--text-muted) !important; }
 .bg-light { background-color: var(--bg-secondary) !important; }
 .text-dark { color: var(--text-main) !important; }
 
-/* =========================================
-   3. НАВИГАЦИЯ
-   ========================================= */
 .navbar {
     background-color: var(--nav-bg);
     backdrop-filter: blur(12px);
@@ -88,6 +65,8 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.5rem;
 }
 
+.navbar-brand span { color: var(--primary-color); }
+
 .theme-toggle-btn {
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
@@ -99,7 +78,7 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all .2s ease;
 }
 
 .theme-toggle-btn:hover {
@@ -109,24 +88,19 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .navbar-custom {
-    transition: all 0.3s ease;
+    transition: all .3s ease;
     padding: 1.2rem 0;
 }
 
-/* Эффект при скролле (добавляется через JS ниже) */
 .navbar-scrolled {
-    padding: 0.6rem 0;
+    padding: .6rem 0;
     box-shadow: var(--shadow-card);
-}
-
-.navbar-brand span {
-    color: var(--primary-color);
 }
 
 .nav-link {
     color: var(--text-main) !important;
     position: relative;
-    transition: 0.3s;
+    transition: .3s;
 }
 
 .nav-link:after {
@@ -137,19 +111,13 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 5px;
     left: 50%;
     background: var(--primary-color);
-    transition: 0.3s;
+    transition: .3s;
     transform: translateX(-50%);
 }
 
-.nav-link:hover:after {
-    width: 20px;
-}
+.nav-link:hover:after { width: 20px; }
+.nav-link:hover { color: var(--primary-color) !important; }
 
-.nav-link:hover {
-    color: var(--primary-color) !important;
-}
-
-/* Адаптация для мобильного меню */
 @media (max-width: 991px) {
     .navbar-collapse {
         background: var(--bg-card);
@@ -161,13 +129,9 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-/* =========================================
-   4. ГЕРОЙ (HERO SECTION)
-   ========================================= */
 .hero-section {
     min-height: 85vh;
-    background: radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%),
-                url('https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80');
+    background: radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%), url('https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80');
     background-size: cover;
     background-position: center;
     color: #fff;
@@ -175,14 +139,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 [data-theme="dark"] .hero-section {
-    background: radial-gradient(circle at center, rgba(0,0,0,0.4) 0%, var(--bg-body) 100%),
-                url('https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80');
+    background: radial-gradient(circle at center, rgba(0,0,0,0.4) 0%, var(--bg-body) 100%), url('https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80');
     background-size: cover;
 }
 
-/* =========================================
-   5. ТИПОГРАФИКА И ЭЛЕМЕНТЫ
-   ========================================= */
+.hero-section h1, .hero-section p, .hero-section .text-white-50 { color: #ffffff !important; }
+.hero-section h1 { text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); }
+
 .section-title {
     color: var(--text-main);
     font-weight: 800;
@@ -198,12 +161,9 @@ h1, h2, h3, h4, h5, h6 {
 
 .trust-line span {
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: .95rem;
 }
 
-/* =========================================
-   6. КНОПКИ (MODERN UI)
-   ========================================= */
 .btn-anime-primary {
     background: var(--primary-color);
     color: white !important;
@@ -212,7 +172,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
     border: none;
     box-shadow: var(--shadow-glow);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all .3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .btn-anime-primary:hover {
@@ -229,7 +189,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 14px 32px;
     border-radius: 14px;
     font-weight: 600;
-    transition: all 0.3s ease;
+    transition: all .3s ease;
 }
 
 .btn-anime-glass:hover {
@@ -245,7 +205,7 @@ h1, h2, h3, h4, h5, h6 {
     border: 2px solid var(--input-border);
     color: var(--text-main);
     font-weight: 700;
-    transition: 0.3s;
+    transition: .3s;
 }
 
 .btn-buy-now:hover {
@@ -254,10 +214,6 @@ h1, h2, h3, h4, h5, h6 {
     background: rgba(124, 58, 237, 0.05);
 }
 
-/* =========================================
-   7. КАРТОЧКА ЗАКАЗА (ИСПРАВЛЕНИЕ БАГА)
-   ========================================= */
-/* Это исправляет белую карточку в темной теме */
 .custom-form-card, .card {
     background-color: var(--bg-card) !important;
     color: var(--text-main) !important;
@@ -265,18 +221,15 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 24px !important;
 }
 
-.form-header h3 {
-    color: var(--text-main);
-}
+.form-header h3 { color: var(--text-main); }
 
-/* Поля ввода */
 .form-control {
     background-color: var(--input-bg);
     border: 1px solid var(--input-border);
     color: var(--text-main) !important;
     border-radius: 12px;
     padding: 14px 20px;
-    transition: all 0.3s;
+    transition: all .3s;
 }
 
 .form-control:focus {
@@ -286,23 +239,18 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--text-main);
 }
 
-.form-control::placeholder {
-    color: var(--text-muted);
-}
+.form-control::placeholder { color: var(--text-muted); }
 
-/* =========================================
-   8. КАРТОЧКИ ТОВАРОВ (FIXED)
-   ========================================= */
 .product-card {
     background: var(--bg-card) !important;
     border-radius: 20px !important;
     border: 1px solid var(--border-color) !important;
-    transition: all 0.4s ease;
+    transition: all .4s ease;
     overflow: hidden;
 }
 
 [data-theme="dark"] .product-card {
-    background: #18181b !important; /* Глубокий темный для карточек */
+    background: #18181b !important;
     border: 1px solid rgba(255,255,255,0.1) !important;
 }
 
@@ -316,15 +264,13 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.6s ease;
+    transition: transform .6s ease;
 }
 
-.product-card:hover .product-img-container img {
-    transform: scale(1.05);
-}
+.product-card:hover .product-img-container img { transform: scale(1.05); }
 
 .fandom-label {
-    font-size: 0.8rem;
+    font-size: .8rem;
     color: var(--primary-color);
     font-weight: 700;
 }
@@ -333,24 +279,6 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.5rem;
     font-weight: 800;
     color: var(--text-main);
-}
-
-/* Стили для кнопок внутри карточек */
-.btn-buy-now {
-    background: transparent;
-    border: 1px solid var(--border-color);
-    color: var(--text-main);
-    border-radius: 12px;
-    padding: 10px;
-    font-weight: 600;
-    width: 100%;
-    transition: 0.3s;
-}
-
-.btn-buy-now:hover {
-    border-color: var(--primary-color);
-    color: var(--primary-color) !important;
-    background: rgba(124, 58, 237, 0.05);
 }
 
 .product-tags .badge {
@@ -364,9 +292,6 @@ h1, h2, h3, h4, h5, h6 {
     border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
-/* =========================================
-   9. АККОРДЕОН И FAQ
-   ========================================= */
 .accordion-item {
     background-color: transparent !important;
     border: none;
@@ -381,21 +306,11 @@ h1, h2, h3, h4, h5, h6 {
     padding: 1.5rem 0;
 }
 
-.accordion-button:not(.collapsed) {
-    color: var(--primary-color) !important;
-}
+.accordion-button:not(.collapsed) { color: var(--primary-color) !important; }
 
-.accordion-button::after {
-    filter: grayscale(100%);
-}
+.accordion-button::after { filter: grayscale(100%); }
+[data-theme="dark"] .accordion-button::after { filter: invert(1); }
 
-[data-theme="dark"] .accordion-button::after {
-    filter: invert(1);
-}
-
-/* =========================================
-   10. БЛОК О НАС
-   ========================================= */
 .about-text p {
     font-size: 1.1rem;
     color: var(--text-muted);
@@ -409,17 +324,14 @@ h1, h2, h3, h4, h5, h6 {
     top: -10%;
     left: -10%;
     background: var(--primary-color);
-    opacity: 0.15;
+    opacity: .15;
     filter: blur(80px);
     z-index: 0;
     border-radius: 50%;
 }
 
-[data-theme="dark"] .about-blob {
-    opacity: 0.25;
-}
+[data-theme="dark"] .about-blob { opacity: .25; }
 
-/* Steps Process */
 .custom-steps-v2 .step-item {
     display: flex;
     gap: 20px;
@@ -430,33 +342,17 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.5rem;
     font-weight: 800;
     color: var(--primary-color);
-    opacity: 0.5;
+    opacity: .5;
     font-family: var(--font-main);
 }
 
-.hero-section h1,
-.hero-section p,
-.hero-section .text-white-50 {
-    color: #ffffff !important;
-}
-
-.hero-section h1 {
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-}
-
-.video-container {
-    line-height: 0; /* Убирает лишний отступ снизу видео */
-}
-
+.video-container { line-height: 0; }
 .video-container video {
     object-fit: cover;
-    min-height: 400px; /* Можно настроить высоту под ваш текст */
+    min-height: 400px;
     max-height: 500px;
 }
 
-/* =========================================
-   11. ПОДВАЛ (FOOTER)
-   ========================================= */
 .footer-section {
     background-color: var(--bg-card);
     padding: 80px 0 30px;
@@ -466,7 +362,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .footer-description {
     color: var(--text-muted);
-    font-size: 0.95rem;
+    font-size: .95rem;
     max-width: 300px;
     margin-bottom: 25px;
 }
@@ -483,15 +379,13 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0;
 }
 
-.footer-links li {
-    margin-bottom: 12px;
-}
+.footer-links li { margin-bottom: 12px; }
 
 .footer-links a {
     color: var(--text-muted);
     text-decoration: none;
-    transition: 0.3s;
-    font-size: 0.95rem;
+    transition: .3s;
+    font-size: .95rem;
 }
 
 .footer-links a:hover {
@@ -514,7 +408,7 @@ h1, h2, h3, h4, h5, h6 {
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    transition: 0.3s;
+    transition: .3s;
     border: 1px solid var(--border-color);
 }
 
@@ -537,11 +431,11 @@ h1, h2, h3, h4, h5, h6 {
 .footer-divider {
     margin: 50px 0 30px;
     border-color: var(--border-color);
-    opacity: 0.1;
+    opacity: .1;
 }
 
 .footer-bottom {
-    font-size: 0.85rem;
+    font-size: .85rem;
     color: var(--text-muted);
 }
 
@@ -551,7 +445,36 @@ h1, h2, h3, h4, h5, h6 {
     margin-left: 20px;
 }
 
-.footer-legal a:hover {
+.footer-legal a:hover { color: var(--text-main); }
+
+.search-bar-custom {
+    border-radius: 50px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: box-shadow .3s ease, border-color .3s ease;
+    background: var(--input-bg);
+}
+
+.search-bar-custom:focus-within {
+    box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+    border-color: var(--primary-color);
+}
+
+.search-bar-custom input {
+    background: transparent;
     color: var(--text-main);
 }
 
+.search-bar-custom input:focus {
+    box-shadow: none;
+    background: transparent;
+}
+
+.search-bar-custom .input-group-text { background: transparent !important; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.product-item { animation: fadeIn .5s ease forwards; }
