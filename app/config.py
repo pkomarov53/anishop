@@ -1,3 +1,39 @@
+# Конфигурация и константы
+import os
+
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+
+class Config:
+    SECRET_KEY = "block-stash-booking-reading-twilight"
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, '../shop.db')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    # Telegram
+    TG_BOT_TOKEN = "7698217701:AAEEYu7_l-nRfX7pL3gne_U7SW9y--7OXVI"
+    TG_CHAT_ID = "473516172"
+
+    # Google Sheets
+    SHEET_URL = "https://docs.google.com/spreadsheets/d/1mgtgOb9_mD6rucPHrIc4M_Y6e_McQIYcWkChQk3t0HE/edit"
+    WORKSHEET_NAME = "Для сайта"
+
+
+# Данные интерфейса (можно вынести отдельно, но пока оставим здесь)
+NAV_MENU = [
+    {'name': 'О нас', 'url': '#about'},
+    {'name': 'Каталог', 'url': '#catalog'},
+    {'name': 'FAQ', 'url': '#faq'},
+]
+
+FOOTER_DATA = {
+    'description': 'Создаем уникальные цифровые и печатные арты для истинных ценителей аниме-культуры.',
+    'owner': 'ИП Котельников Родион Дмитриевич',
+    'inn': '123456789012',
+    'ogrnip': '321654987000012',
+    'location': 'Россия, г. Москва',
+    'year_range': '2024-2026'
+}
+
 FAQ_ITEMS = [
     {"q": "Как осуществляется доставка?", "a": "Мы отправляем заказы через Яндекс Доставку или СДЭК по всей РФ."},
     {"q": "Как правильно хранить и размещать картину?", "a": "Это интерьерная картина на холсте с глубокой цветопередачей."},

@@ -1,74 +1,68 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    /* =========================
+       ТЕМА (dark / light)
+    ========================= */
+
     const toggleBtn = document.getElementById('theme-toggle');
     const themeIcon = document.getElementById('theme-icon');
-    const body = document.body;
+    const root = document.documentElement; // <-- html
 
-    // Функция установки темы
     function setTheme(themeName) {
         localStorage.setItem('theme', themeName);
-        if (themeName === 'dark') {
-            body.setAttribute('data-theme', 'dark');
-            themeIcon.textContent = '☀️';
-        } else {
-            body.removeAttribute('data-theme');
-            themeIcon.textContent = '🌙';
-        }
+        root.setAttribute('data-theme', themeName);
+
+        themeIcon.textContent = themeName === 'dark' ? '☀️' : '🌙';
     }
 
-    // Проверка сохраненной темы при загрузке
+    // загрузка сохранённой темы
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        setTheme('dark');
+    if (savedTheme) {
+        setTheme(savedTheme);
     } else {
-        // Если темы нет в localStorage, можно проверить системные настройки
-        // const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        // if (prefersDark) setTheme('dark');
+        root.setAttribute('data-theme', 'light');
     }
 
-    // Обработчик клика
+    // переключение
     toggleBtn.addEventListener('click', () => {
-        if (body.getAttribute('data-theme') === 'dark') {
-            setTheme('light');
-        } else {
-            setTheme('dark');
-        }
+        const current = root.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        setTheme(next);
     });
-    document.addEventListener('DOMContentLoaded', () => {
-    // --- ЛОГИКА КАТАЛОГА (ПОИСК + "ПОКАЗАТЬ ЕЩЁ") ---
+
+
+
+    /* =========================
+       КАТАЛОГ (поиск + показать ещё)
+    ========================= */
 
     const searchInput = document.getElementById('searchInput');
-    const productsContainer = document.getElementById('productsContainer');
     const allProducts = Array.from(document.querySelectorAll('.product-item'));
     const loadMoreBtn = document.getElementById('loadMoreBtn');
     const noResults = document.getElementById('noResults');
 
-    let visibleCount = 6; // Сколько показывать сначала
-    const itemsPerLoad = 3; // Сколько добавлять по кнопке
+    let visibleCount = 6;
+    const itemsPerLoad = 3;
 
-    // Функция отображения товаров
     function renderCatalog() {
         const query = searchInput.value.toLowerCase().trim();
         let matches = 0;
-        let visibleMatches = 0;
 
         allProducts.forEach(product => {
-            // Получаем данные из data-атрибутов
-            const title = product.dataset.title;
-            const fandom = product.dataset.fandom;
-            const tags = product.dataset.tags;
+            const title = product.dataset.title || '';
+            const fandom = product.dataset.fandom || '';
+            const tags = product.dataset.tags || '';
 
-            // Проверяем соответствие поиску (или если поиск пустой - true)
-            const isMatch = !query ||
-                            title.includes(query) ||
-                            fandom.includes(query) ||
-                            tags.includes(query);
+            const isMatch =
+                !query ||
+                title.includes(query) ||
+                fandom.includes(query) ||
+                tags.includes(query);
 
             if (isMatch) {
                 matches++;
-                // Показываем только если мы не превысили лимит visibleCount
                 if (matches <= visibleCount) {
                     product.classList.remove('d-none');
-                    visibleMatches++;
                 } else {
                     product.classList.add('d-none');
                 }
@@ -77,132 +71,83 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Управление видимостью кнопки "Показать ещё"
-        // Если количество совпадений больше, чем мы сейчас показали -> кнопка нужна
-        if (matches > visibleCount) {
-            loadMoreBtn.classList.remove('d-none');
-        } else {
-            loadMoreBtn.classList.add('d-none');
-        }
-
-        // Управление блоком "Ничего не найдено"
-        if (matches === 0) {
-            noResults.classList.remove('d-none');
-        } else {
-            noResults.classList.add('d-none');
-        }
+        loadMoreBtn.classList.toggle('d-none', matches <= visibleCount);
+        noResults.classList.toggle('d-none', matches !== 0);
     }
 
-    // Событие ввода в поиск
     searchInput.addEventListener('input', () => {
-        // При поиске сбрасываем счетчик видимых до начального значения
         visibleCount = 6;
         renderCatalog();
     });
 
-    // Событие клика "Показать ещё"
     loadMoreBtn.addEventListener('click', () => {
         visibleCount += itemsPerLoad;
         renderCatalog();
     });
 
-    // Инициализация при загрузке
     renderCatalog();
 });
-});
 
-window.addEventListener('scroll', function() {
+
+
+/* =========================
+   Navbar scroll
+========================= */
+
+window.addEventListener('scroll', () => {
     const nav = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        nav.classList.add('navbar-scrolled');
-    } else {
-        nav.classList.remove('navbar-scrolled');
-    }
+    if (!nav) return;
+
+    nav.classList.toggle('navbar-scrolled', window.scrollY > 50);
 });
 
-// Закрытие мобильного меню при клике на ссылку
+
+
+/* =========================
+   Закрытие мобильного меню
+========================= */
+
 const navLinks = document.querySelectorAll('.nav-link');
 const menuToggle = document.getElementById('mainNav');
-const bsCollapse = new bootstrap.Collapse(menuToggle, {toggle:false});
-navLinks.forEach((l) => {
-    l.addEventListener('click', () => {
-        if(window.innerWidth < 992) { bsCollapse.hide(); }
-    });
-});
 
-document.addEventListener('DOMContentLoaded', () => {
-    // --- ЛОГИКА КАТАЛОГА (ПОИСК + "ПОКАЗАТЬ ЕЩЁ") ---
+if (menuToggle && window.bootstrap) {
+    const bsCollapse = new bootstrap.Collapse(menuToggle, { toggle: false });
 
-    const searchInput = document.getElementById('searchInput');
-    const productsContainer = document.getElementById('productsContainer');
-    const allProducts = Array.from(document.querySelectorAll('.product-item'));
-    const loadMoreBtn = document.getElementById('loadMoreBtn');
-    const noResults = document.getElementById('noResults');
-
-    let visibleCount = 6; // Сколько показывать сначала
-    const itemsPerLoad = 3; // Сколько добавлять по кнопке
-
-    // Функция отображения товаров
-    function renderCatalog() {
-        const query = searchInput.value.toLowerCase().trim();
-        let matches = 0;
-        let visibleMatches = 0;
-
-        allProducts.forEach(product => {
-            // Получаем данные из data-атрибутов
-            const title = product.dataset.title;
-            const fandom = product.dataset.fandom;
-            const tags = product.dataset.tags;
-
-            // Проверяем соответствие поиску (или если поиск пустой - true)
-            const isMatch = !query ||
-                            title.includes(query) ||
-                            fandom.includes(query) ||
-                            tags.includes(query);
-
-            if (isMatch) {
-                matches++;
-                // Показываем только если мы не превысили лимит visibleCount
-                if (matches <= visibleCount) {
-                    product.classList.remove('d-none');
-                    visibleMatches++;
-                } else {
-                    product.classList.add('d-none');
-                }
-            } else {
-                product.classList.add('d-none');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth < 992) {
+                bsCollapse.hide();
             }
         });
-
-        // Управление видимостью кнопки "Показать ещё"
-        // Если количество совпадений больше, чем мы сейчас показали -> кнопка нужна
-        if (matches > visibleCount) {
-            loadMoreBtn.classList.remove('d-none');
-        } else {
-            loadMoreBtn.classList.add('d-none');
-        }
-
-        // Управление блоком "Ничего не найдено"
-        if (matches === 0) {
-            noResults.classList.remove('d-none');
-        } else {
-            noResults.classList.add('d-none');
-        }
-    }
-
-    // Событие ввода в поиск
-    searchInput.addEventListener('input', () => {
-        // При поиске сбрасываем счетчик видимых до начального значения
-        visibleCount = 6;
-        renderCatalog();
     });
+}
+/* =========================
+   Upload preview
+========================= */
 
-    // Событие клика "Показать ещё"
-    loadMoreBtn.addEventListener('click', () => {
-        visibleCount += itemsPerLoad;
-        renderCatalog();
-    });
+const refInput = document.getElementById("refImage");
+const previewBox = document.getElementById("uploadPreview");
+const previewImg = document.getElementById("previewImg");
+const removeBtn = document.getElementById("removeImg");
 
-    // Инициализация при загрузке
-    renderCatalog();
-});
+if (refInput) {
+  refInput.addEventListener("change", () => {
+    const file = refInput.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = e => {
+      previewImg.src = e.target.result;
+      previewBox.classList.remove("d-none");
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+if (removeBtn) {
+  removeBtn.addEventListener("click", () => {
+    refInput.value = "";
+    previewImg.src = "";
+    previewBox.classList.add("d-none");
+  });
+}
