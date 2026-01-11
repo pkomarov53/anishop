@@ -5,16 +5,16 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class Config:
-    SECRET_KEY = "block-stash-booking-reading-twilight"
+    SECRET_KEY = ""
     SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, '../shop.db')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Telegram
-    TG_BOT_TOKEN = "7698217701:AAEEYu7_l-nRfX7pL3gne_U7SW9y--7OXVI"
-    TG_CHAT_ID = "473516172"
+    TG_BOT_TOKEN = ""
+    TG_CHAT_ID = ""
 
     # Google Sheets
-    SHEET_URL = "https://docs.google.com/spreadsheets/d/1mgtgOb9_mD6rucPHrIc4M_Y6e_McQIYcWkChQk3t0HE/edit"
+    SHEET_URL = ""
     WORKSHEET_NAME = "Для сайта"
 
 
@@ -27,11 +27,11 @@ NAV_MENU = [
 
 FOOTER_DATA = {
     'description': 'Создаем уникальные цифровые и печатные арты для истинных ценителей аниме-культуры.',
-    'owner': 'ИП Котельников Родион Дмитриевич',
-    'inn': '123456789012',
-    'ogrnip': '321654987000012',
-    'location': 'Россия, г. Москва',
-    'year_range': '2024-2026'
+    'owner': '',
+    'inn': '',
+    'ogrnip': '',
+    'location': '',
+    'year_range': ''
 }
 
 FAQ_ITEMS = [
